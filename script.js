@@ -56,13 +56,14 @@ const displayOperator = document.querySelector(".operator");
 const selectNumOne = document.querySelectorAll(".numbers button");
 const selectNumTwo = document.querySelectorAll(".numbers button");
 const selectOperator = document.querySelectorAll(".operators button");
+const backspace = document.querySelector(".backspace")
 
 const btnOperate = document.querySelector(".btn-operate");
 const btnClear = document.querySelector(".clear");
 
 selectNumOne.forEach((num) => {
   num.addEventListener("click", () => {
-    if (operator === "") {
+    if (operator === "" && num.textContent !== "<") {
       numOne += num.textContent;
 
       console.log("#1 " + numOne);
@@ -79,7 +80,7 @@ selectNumOne.forEach((num) => {
 
 selectNumTwo.forEach((num) => {
   num.addEventListener("click", () => {
-    if (operator !== "") {
+    if (operator !== "" && num.textContent !== "<") {
       numTwo += num.textContent;
 
       console.log("#2 " + numTwo);
@@ -130,6 +131,27 @@ selectOperator.forEach((op) => {
       }
     }
   });
+});
+
+backspace.addEventListener("click", () => {
+  if (numOne !== "" && numTwo === "" && operator === "") {
+    numOne = String(numOne).slice(0, -1);
+    displayNumOne.textContent = numOne;
+
+    console.log("#1 "+numOne)
+  } else if (operator !== "" && numTwo === "") {
+    operator = "";
+    displayOperator.textContent = operator;
+
+    console.log(operator);
+  } else if (numTwo !== "") {
+    numTwo = numTwo.slice(0, -1);
+    displayNumTwo.textContent = numTwo;
+
+    console.log("#2 "+numTwo)
+  } else {
+    clearVar();
+  }
 });
 
 btnOperate.addEventListener("click", () => {
