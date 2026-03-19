@@ -56,14 +56,15 @@ const displayOperator = document.querySelector(".operator");
 const selectNumOne = document.querySelectorAll(".numbers button");
 const selectNumTwo = document.querySelectorAll(".numbers button");
 const selectOperator = document.querySelectorAll(".operators button");
-const backspace = document.querySelector(".backspace")
+const backspace = document.querySelector(".backspace");
+const decimal = document.querySelector(".decimal");
 
 const btnOperate = document.querySelector(".btn-operate");
 const btnClear = document.querySelector(".clear");
 
 selectNumOne.forEach((num) => {
   num.addEventListener("click", () => {
-    if (operator === "" && num.textContent !== "<") {
+    if (operator === "" && num.textContent !== "<" && num.textContent !== ".") {
       numOne += num.textContent;
 
       console.log("#1 " + numOne);
@@ -80,7 +81,7 @@ selectNumOne.forEach((num) => {
 
 selectNumTwo.forEach((num) => {
   num.addEventListener("click", () => {
-    if (operator !== "" && num.textContent !== "<") {
+    if (operator !== "" && num.textContent !== "<" && num.textContent !== ".") {
       numTwo += num.textContent;
 
       console.log("#2 " + numTwo);
@@ -138,7 +139,9 @@ backspace.addEventListener("click", () => {
     numOne = String(numOne).slice(0, -1);
     displayNumOne.textContent = numOne;
 
-    console.log("#1 "+numOne)
+    result = "Fix"; // To fix the numOne reset when clicking backspace
+
+    console.log("#1 " + numOne);
   } else if (operator !== "" && numTwo === "") {
     operator = "";
     displayOperator.textContent = operator;
@@ -148,10 +151,22 @@ backspace.addEventListener("click", () => {
     numTwo = numTwo.slice(0, -1);
     displayNumTwo.textContent = numTwo;
 
-    console.log("#2 "+numTwo)
-  } else {
-    clearVar();
+    console.log("#2 " + numTwo);
   }
+});
+
+decimal.addEventListener("click", () => {
+  if (!String(numOne).includes(".") && operator === "" && numTwo === "") {
+    if (numOne === "") numOne += "0.";
+    else numOne += ".";
+
+    displayNumOne.textContent = numOne;
+  } else if (!numTwo.includes(".") && operator !== "") {
+    if (numTwo === "") numTwo += "0.";
+    else numTwo += ".";
+
+    displayNumTwo.textContent = numTwo;
+  } else return;
 });
 
 btnOperate.addEventListener("click", () => {

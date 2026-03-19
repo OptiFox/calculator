@@ -1,121 +1,121 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: blanchedalmond;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: blanchedalmond;
 }
 
 h1 {
-    font-weight: 900;
-    font-size: 48px;
+  font-weight: 900;
+  font-size: 48px;
 }
 
 .container {
-    background-color: rgb(0, 0, 0);
-    width: 360px;
-    height: 550px;
-    font-size: 48px;
-    border: 4px solid rgb(68, 68, 68);
-    border-radius: 24px;
-    padding: 12px;
+  background-color: rgb(0, 0, 0);
+  width: 360px;
+  height: 550px;
+  font-size: 48px;
+  border: 4px solid rgb(68, 68, 68);
+  border-radius: 24px;
+  padding: 12px;
 }
 
 .display {
-    background-color: white;
-    text-align: right;
-    padding: 18px 24px;
-    border-radius: 12px;
-    margin: 12px 12px;
-    height: 50px;
-    overflow: hidden;
-    display: flex;
-    justify-content: end;
+  background-color: white;
+  text-align: right;
+  padding: 18px 24px;
+  border-radius: 12px;
+  margin: 12px 12px;
+  height: 50px;
+  overflow: hidden;
+  display: flex;
+  justify-content: end;
 }
 
 .operator {
-    height: 50px;
+  height: 50px;
 }
 
 button {
-    width: 80px;
-    height: 80px;
-    padding: 12px;
-    font-size: 48px;
-    border-radius: 12px;
-    color: white;
-    border: 1px solid rgb(100, 100, 100);
+  width: 80px;
+  height: 80px;
+  padding: 12px;
+  font-size: 48px;
+  border-radius: 12px;
+  color: white;
+  border: 1px solid rgb(100, 100, 100);
 }
 
 .keys {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 400px;
-    width: 375px;
-    margin-top: 12px;
-    padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  width: 375px;
+  margin-top: 12px;
+  padding: 12px;
 }
 
 .number-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 295px;
-    height: 400px;
-    row-gap: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 295px;
+  height: 400px;
+  row-gap: 6px;
 }
 
 .number-container button {
-    background-color: rgb(57, 57, 57);
+  background-color: rgb(57, 57, 57);
 }
 
 .number-container button:active {
-    background-color: rgb(39, 39, 39);
+  background-color: rgb(39, 39, 39);
 }
 
 .numbers {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row-reverse;
-    width: 250px;
-    height: 330px;
-    gap: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  width: 250px;
+  height: 330px;
+  gap: 4px;
 }
 
 .number-container .clear:last-child {
-    background-color: rgb(32, 32, 32);
+  background-color: rgb(32, 32, 32);
 }
 
 .number-container .clear:active {
-    background-color: rgb(26, 26, 26);
+  background-color: rgb(26, 26, 26);
 }
 
 .clear {
-    width: 250px;
+  width: 250px;
 }
 
 .operator-container {
-    display: flex;
-    flex-direction: column;
-    width: 140px;
-    height: 400px;
-    row-gap: 6px;
+  display: flex;
+  flex-direction: column;
+  width: 140px;
+  height: 400px;
+  row-gap: 6px;
 }
 
 .operator-container button {
-    background-color: rgb(255, 162, 0);
+  background-color: rgb(255, 162, 0);
 }
 
 .operator-container button:active {
-    background-color: rgb(255, 184, 62);
+  background-color: rgb(255, 184, 62);
 }
 
 .operators {
-    height: 330px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  height: 330px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
