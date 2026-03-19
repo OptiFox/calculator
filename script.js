@@ -110,9 +110,10 @@ selectOperator.forEach((op) => {
 
         numOne = Math.round(result * 100) / 100;
 
-        if (numTwo == 0 && operator === "/")
-          displayNumOne.textContent = "ERROR";
-        else {
+        if (numTwo == 0 && operator === "/") {
+          display.textContent = "ERROR";
+          clearVar();
+        } else {
           displayNumOne.textContent = numOne;
           displayOperator.textContent = operator;
 
@@ -136,8 +137,10 @@ btnOperate.addEventListener("click", () => {
 
     numOne = Math.round(result * 100) / 100;
 
-    if (numTwo == 0 && operator === "/") displayNumOne.textContent = "ERROR";
-    else {
+    if (numTwo == 0 && operator === "/") {
+      displayNumOne.textContent = "ERROR";
+      clearVar();
+    } else {
       displayNumOne.textContent = numOne;
       numTwo = "";
       operator = "";
