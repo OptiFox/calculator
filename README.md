@@ -5,3 +5,4 @@ todo:
 - [ ] add decimals
 - [ ] add backspace
 - [ ] add keyboard support
+- [ ] Improve UI

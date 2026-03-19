@@ -80,6 +80,10 @@ button {
     gap: 4px;
 }
 
+.number-container .clear:last-child {
+    background-color: rgb(255, 162, 0);
+}
+
 .clear {
     width: 250px;
 }
@@ -98,4 +102,7 @@ button {
 
 .operators {
     height: 330px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
