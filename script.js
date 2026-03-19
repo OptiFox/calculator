@@ -71,7 +71,7 @@ selectNumOne.forEach((num) => {
       if (isFinite(result) && result !== "") {
         numOne = num.textContent;
         displayNumOne.textContent = numOne;
-        result = "Fix"; // Random value to make sure typeof result != number
+        result = "Fix"; // Random string value to make sure typeof result != number
       } else displayNumOne.textContent = numOne;
     }
   });
@@ -89,10 +89,14 @@ selectNumTwo.forEach((num) => {
   });
 });
 
+let division = "";
+
 selectOperator.forEach((op) => {
   op.addEventListener("click", () => {
     if (numOne !== "") {
       operator = op.textContent;
+
+      if (operator === "/") division = operator;
 
       if (
         !displayOperator.textContent.includes("/") &&
@@ -110,8 +114,8 @@ selectOperator.forEach((op) => {
 
         numOne = Math.round(result * 100) / 100;
 
-        if (numTwo == 0 && operator === "/") {
-          display.textContent = "ERROR";
+        if (numTwo == 0 && division === "/") {
+          displayNumOne.textContent = "ERROR";
           clearVar();
         } else {
           displayNumOne.textContent = numOne;

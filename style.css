@@ -55,7 +55,6 @@ button {
     align-items: center;
     height: 400px;
     width: 375px;
-    /* background-color: rgb(255, 162, 0); */
     margin-top: 12px;
     padding: 12px;
 }
@@ -79,10 +78,6 @@ button {
     width: 250px;
     height: 330px;
     gap: 4px;
-}
-
-.numbers button:last-child {
-    width: 250px;
 }
 
 .clear {
