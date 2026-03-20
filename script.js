@@ -286,7 +286,7 @@ document.addEventListener("keydown", (event) => {
 
       decimal.blur();
     }
-  } else if (event.key == "Enter") {
+  } else if (event.key == "Enter" || event.key == "=") {
     if (document.activeElement !== btnOperate) {
       btnOperate.focus();
 
