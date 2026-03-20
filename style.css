@@ -55,7 +55,7 @@ button {
   justify-content: center;
   align-items: center;
   height: 400px;
-  width: 375px;
+  width: 340px;
   margin-top: 12px;
   padding: 12px;
 }
@@ -100,7 +100,7 @@ button {
 .operator-container {
   display: flex;
   flex-direction: column;
-  width: 140px;
+  width: 90px;
   height: 400px;
   row-gap: 6px;
 }

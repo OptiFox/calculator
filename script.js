@@ -36,7 +36,6 @@ function operate(a, b, operator) {
 }
 
 function clearDisplay() {
-  //   display.textContent = "";
   displayNumOne.textContent = "";
   displayNumTwo.textContent = "";
   displayOperator.textContent = "";
@@ -48,7 +47,6 @@ function clearVar() {
   operator = "";
 }
 
-// const display = document.querySelector(".display");
 const displayNumOne = document.querySelector(".num-one");
 const displayNumTwo = document.querySelector(".num-two");
 const displayOperator = document.querySelector(".operator");
@@ -62,103 +60,164 @@ const decimal = document.querySelector(".decimal");
 const btnOperate = document.querySelector(".btn-operate");
 const btnClear = document.querySelector(".clear");
 
+const shouldResetDisplay = () => isFinite(result) && result !== "";
+const fixRepetition = "Fix with random value";
+const stopDisplayReset = () => (result = fixRepetition);
+
+function getNumOne(num) {
+  if (operator === "" && num.textContent !== "<" && num.textContent !== ".") {
+    numOne += num.textContent;
+
+    if (shouldResetDisplay()) {
+      numOne = num.textContent;
+      displayNumOne.textContent = numOne;
+      stopDisplayReset();
+    } else displayNumOne.textContent = numOne;
+  }
+}
+
+function getNumTwo(num) {
+  if (operator !== "" && num.textContent !== "<" && num.textContent !== ".") {
+    numTwo += num.textContent;
+
+    displayNumTwo.textContent = numTwo;
+  }
+}
+
+let eventKey = "";
+
+let numConditions = (eventKey) => {
+  let numKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  return numKeys[eventKey];
+};
+
 selectNumOne.forEach((num) => {
   num.addEventListener("click", () => {
-    if (operator === "" && num.textContent !== "<" && num.textContent !== ".") {
-      numOne += num.textContent;
+    getNumOne(num);
+  });
 
-      console.log("#1 " + numOne);
+  document.addEventListener("keydown", (event) => {
+    eventKey = event.key;
 
-      // Clear display if pressing input when only numOne exist
-      if (isFinite(result) && result !== "") {
-        numOne = num.textContent;
-        displayNumOne.textContent = numOne;
-        result = "Fix"; // Random string value to make sure typeof result != number
-      } else displayNumOne.textContent = numOne;
+    if (numConditions(eventKey)) {
+      if (document.activeElement !== num && num.textContent == eventKey) {
+        num.focus();
+
+        getNumOne(num);
+
+        num.blur();
+      }
     }
   });
 });
 
 selectNumTwo.forEach((num) => {
   num.addEventListener("click", () => {
-    if (operator !== "" && num.textContent !== "<" && num.textContent !== ".") {
-      numTwo += num.textContent;
+    getNumTwo(num);
+  });
 
-      console.log("#2 " + numTwo);
+  document.addEventListener("keydown", (event) => {
+    eventKey = event.key;
 
-      displayNumTwo.textContent = numTwo;
+    if (numConditions(eventKey)) {
+      if (document.activeElement !== num && num.textContent == eventKey) {
+        num.focus();
+
+        getNumTwo(num);
+
+        num.blur();
+      }
     }
   });
 });
 
 let division = "";
 
+const displayError = () => (displayNumOne.textContent = "ERROR");
+
+function getOperator(op) {
+  if (numOne !== "") {
+    operator = op.textContent;
+
+    if (operator === "/") division = operator;
+
+    if (
+      !displayOperator.textContent.includes("/") &&
+      !displayOperator.textContent.includes("*") &&
+      !displayOperator.textContent.includes("-") &&
+      !displayOperator.textContent.includes("+")
+    ) {
+      displayOperator.textContent = operator;
+    }
+
+    if (operator !== "" && numOne !== "" && numTwo !== "") {
+      result = operate(numOne, numTwo, displayOperator.textContent);
+
+      clearDisplay();
+
+      numOne = Math.round(result * 100) / 100;
+
+      if (numTwo == 0 && division === "/") {
+        displayError();
+        clearVar();
+      } else {
+        displayNumOne.textContent = numOne;
+        displayOperator.textContent = operator;
+
+        numTwo = "";
+
+        result = operate(numOne, numTwo, operator);
+      }
+    }
+  }
+}
+
 selectOperator.forEach((op) => {
   op.addEventListener("click", () => {
-    if (numOne !== "") {
-      operator = op.textContent;
+    getOperator(op);
+  });
 
-      if (operator === "/") division = operator;
+  document.addEventListener("keydown", (event) => {
+    eventKey = event.key;
 
-      if (
-        !displayOperator.textContent.includes("/") &&
-        !displayOperator.textContent.includes("*") &&
-        !displayOperator.textContent.includes("-") &&
-        !displayOperator.textContent.includes("+")
-      ) {
-        displayOperator.textContent = operator;
-      }
+    if (
+      eventKey == "+" ||
+      eventKey == "-" ||
+      eventKey == "*" ||
+      eventKey == "/"
+    ) {
+      if (document.activeElement !== op && op.textContent == eventKey) {
+        op.focus();
 
-      if (operator !== "" && numOne !== "" && numTwo !== "") {
-        result = operate(numOne, numTwo, displayOperator.textContent);
+        getOperator(op);
 
-        clearDisplay();
-
-        numOne = Math.round(result * 100) / 100;
-
-        if (numTwo == 0 && division === "/") {
-          displayNumOne.textContent = "ERROR";
-          clearVar();
-        } else {
-          displayNumOne.textContent = numOne;
-          displayOperator.textContent = operator;
-
-          numTwo = "";
-
-          result = operate(numOne, numTwo, operator);
-        }
-
-        console.log(result);
+        op.blur();
       }
     }
   });
 });
 
-backspace.addEventListener("click", () => {
+function getBackspace() {
   if (numOne !== "" && numTwo === "" && operator === "") {
     numOne = String(numOne).slice(0, -1);
     displayNumOne.textContent = numOne;
 
-    result = "Fix"; // To fix the numOne reset when clicking backspace
-
-    console.log("#1 " + numOne);
+    stopDisplayReset();
   } else if (operator !== "" && numTwo === "") {
     operator = "";
     displayOperator.textContent = operator;
-
-    console.log(operator);
   } else if (numTwo !== "") {
     numTwo = numTwo.slice(0, -1);
     displayNumTwo.textContent = numTwo;
-
-    console.log("#2 " + numTwo);
   }
-});
+}
 
-decimal.addEventListener("click", () => {
+function getDecimal() {
   if (!String(numOne).includes(".") && operator === "" && numTwo === "") {
     if (numOne === "") numOne += "0.";
     else numOne += ".";
+
+    stopDisplayReset();
 
     displayNumOne.textContent = numOne;
   } else if (!numTwo.includes(".") && operator !== "") {
@@ -167,9 +226,9 @@ decimal.addEventListener("click", () => {
 
     displayNumTwo.textContent = numTwo;
   } else return;
-});
+}
 
-btnOperate.addEventListener("click", () => {
+function getOperate() {
   if (numOne === "" || (numOne !== "" && numTwo === "")) return;
   else {
     result = operate(numOne, numTwo, operator);
@@ -179,19 +238,69 @@ btnOperate.addEventListener("click", () => {
     numOne = Math.round(result * 100) / 100;
 
     if (numTwo == 0 && operator === "/") {
-      displayNumOne.textContent = "ERROR";
+      displayError();
       clearVar();
     } else {
       displayNumOne.textContent = numOne;
       numTwo = "";
       operator = "";
     }
-
-    console.log(result);
   }
+}
+
+function getClear() {
+  clearDisplay();
+  clearVar();
+}
+
+backspace.addEventListener("click", () => {
+  getBackspace();
+});
+
+decimal.addEventListener("click", () => {
+  getDecimal();
+});
+
+btnOperate.addEventListener("click", () => {
+  getOperate();
 });
 
 btnClear.addEventListener("click", () => {
-  clearDisplay();
-  clearVar();
+  getClear();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key == "Backspace") {
+    if (document.activeElement !== backspace) {
+      backspace.focus();
+
+      getBackspace();
+
+      backspace.blur();
+    }
+  } else if (event.key == ".") {
+    if (document.activeElement !== decimal) {
+      decimal.focus();
+
+      getDecimal();
+
+      decimal.blur();
+    }
+  } else if (event.key == "Enter") {
+    if (document.activeElement !== btnOperate) {
+      btnOperate.focus();
+
+      getOperate();
+
+      btnOperate.blur();
+    }
+  } else if (event.key == "c" || event.key == "C") {
+    if (document.activeElement !== btnClear) {
+      btnClear.focus();
+
+      getClear();
+
+      btnClear.blur();
+    }
+  }
 });
