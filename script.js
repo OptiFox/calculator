@@ -270,6 +270,7 @@ btnClear.addEventListener("click", () => {
 });
 
 document.addEventListener("keydown", (event) => {
+  event.preventDefault();
   if (event.key == "Backspace") {
     if (document.activeElement !== backspace) {
       backspace.focus();
