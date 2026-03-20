@@ -33,4 +33,4 @@ Where I learn:
 
 - **How to focus input on keypress:** [how to focus on an input when a key is pressed? [closed]](https://stackoverflow.com/questions/60048780/how-to-focus-on-an-input-when-a-key-is-pressed)
 - **How to detect each keys:** [How to capture a backspace on the onkeydown event](https://stackoverflow.com/questions/2353550/how-to-capture-a-backspace-on-the-onkeydown-event)
-- **How to unfocus keys:** [HTMLElement: blur() method](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/blur);
+- **How to unfocus keys:** [HTMLElement: blur() method](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/blur)
